@@ -193,13 +193,19 @@ class AP:
                         v = v.encode('utf-8')
                     print("\t{0}:  {1}".format(_, v))
                 print("\tOperation: {0}".format(log['Operation']))
-                print("\tResult---: {0}".format(log['ResultStatus'].upper()))
+                try:
+                    print("\tResult---: {0}".format(log['ResultStatus'].upper()))
+                except:
+                    print("\tResult---: NO RESULT STATUS")
                 
-                if log['ResultStatus'].lower() == 'succeeded':
-                    foreign_succ += 1
-                elif log['ResultStatus'].lower() == 'failed':
-                    foreign_fail += 1
-                else:
+                try:
+                    if log['ResultStatus'].lower() == 'succeeded':
+                        foreign_succ += 1
+                    elif log['ResultStatus'].lower() == 'failed':
+                        foreign_fail += 1
+                    else:
+                        foreign_other += 1
+                except:
                     foreign_other += 1
                 
                 foreign_result += 1
